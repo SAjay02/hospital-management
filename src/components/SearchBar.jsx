@@ -4,7 +4,7 @@ import React from 'react'
 import {MDBCol,MDBIcon}from "mdb-react-ui-kit"
 const SearchBar = () => {
   return (
-    <div className="position-absolute mt-2 mt-md-4" style={{marginLeft:"150px"}}>
+    <div className="position-absolute mt-1 mt-md-3" style={{marginLeft:"150px"}}>
     <MDBCol md="12">
     <div className="input-group md-form form-sm form-1 pl-0 ">
       <div className="input-group-prepend">
