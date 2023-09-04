@@ -10,7 +10,7 @@ import NavDropdown from 'react-bootstrap/NavDropdown';
 const NavigationBar = () => {
   return (
     <Navbar collapseOnSelect expand="lg" bg="light" variant="light" className="bg-body-tertiary">
-      <Container>
+      <Container fluid>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" className="  "/>
         <Navbar.Collapse id="responsive-navbar-nav" className="">
           <Nav className=" justify-content-between " style={{ marginLeft:"auto"}}>
@@ -30,6 +30,7 @@ const NavigationBar = () => {
         </Navbar.Collapse>
       </Container>
     </Navbar>
+    
   )
 }
 

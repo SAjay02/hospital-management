@@ -3,6 +3,7 @@ import Logo from './Logo'
 import { useState } from 'react'
 import SearchBar from './SearchBar';
 import Button from './Button';
+import CarouselSlider from './CarouselSlider';
 const Header = () => {
     const [color, setColor] = useState("#00806B");
   return (
