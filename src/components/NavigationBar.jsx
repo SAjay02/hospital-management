@@ -1,17 +1,19 @@
 import React from 'react'
 import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
-import Form from 'react-bootstrap/Form';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
-
+import logo1 from '../assests/MenuBar.png';
+import { Image } from 'react-bootstrap';
 
 const NavigationBar = () => {
   return (
     <Navbar collapseOnSelect expand="lg" bg="light" variant="light" className="bg-body-tertiary">
-      <Container>
-        <Navbar.Toggle aria-controls="responsive-navbar-nav" className="  "/>
+      <Container fluid>
+        <Navbar.Toggle aria-controls="responsive-navbar-nav" className=" ">
+          <Image style={{height:"25%",width:"25%"}} src={logo1} className="m-0"/>
+        </Navbar.Toggle>
         <Navbar.Collapse id="responsive-navbar-nav" className="">
           <Nav className=" justify-content-between " style={{ marginLeft:"auto"}}>
             <Nav.Link href="#features">HOME</Nav.Link>
