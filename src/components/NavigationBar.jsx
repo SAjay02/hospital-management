@@ -11,7 +11,11 @@ const NavigationBar = () => {
   return (
     <Navbar collapseOnSelect expand="lg" bg="light" variant="light" className="bg-body-tertiary">
       <Container>
-        <Navbar.Toggle aria-controls="responsive-navbar-nav" className="  "/>
+        <Navbar.Toggle aria-controls="responsive-navbar-nav" className="  ">
+        <div className="">
+          <Image className="" style={{width:"27px",height:"22px"}} src={logo1}></Image>
+        </div>
+        </Navbar.Toggle>
         <Navbar.Collapse id="responsive-navbar-nav" className="">
           <Nav className=" justify-content-between " style={{ marginLeft:"auto"}}>
             <Nav.Link href="#features">HOME</Nav.Link>
