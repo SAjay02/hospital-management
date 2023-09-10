@@ -10,10 +10,8 @@ import { Image } from 'react-bootstrap';
 const NavigationBar = () => {
   return (
     <Navbar collapseOnSelect expand="lg" bg="light" variant="light" className="bg-body-tertiary">
-      <Container fluid>
-        <Navbar.Toggle aria-controls="responsive-navbar-nav" className=" ">
-          <Image style={{height:"25%",width:"25%"}} src={logo1} className="m-0"/>
-        </Navbar.Toggle>
+      <Container>
+        <Navbar.Toggle aria-controls="responsive-navbar-nav" className="  "/>
         <Navbar.Collapse id="responsive-navbar-nav" className="">
           <Nav className=" justify-content-between " style={{ marginLeft:"auto"}}>
             <Nav.Link href="#features">HOME</Nav.Link>
@@ -32,6 +30,7 @@ const NavigationBar = () => {
         </Navbar.Collapse>
       </Container>
     </Navbar>
+    
   )
 }
 
