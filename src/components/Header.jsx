@@ -12,6 +12,7 @@ const Header = () => {
         <header className="d-flex  justify-content-sm-around">
            <Logo/>
            <SearchBar/>
+           
            <Button/>
         </header> 
     </div>
