@@ -1,53 +1,57 @@
 import React from 'react'
-import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
-
+import {Route, Routes, Link,BrowserRouter,useLocation} from 'react-router-dom';
+import Home from './Home';
+import Recent from './Recent';
+import Current from './Current';
+import Upcoming from './Upcoming';
+import About from './About';
+import Contact from './Contact';
+import { ScrollSpy } from 'bootstrap';
+import AddProducts from './AddProducts';
+import Billing from './Billing';
 
 const NavigationBar = () => {
   return (
-    <Navbar collapseOnSelect expand="lg" bg="light" variant="light" className="bg-body-tertiary">
-      <Container fluid>
-        <Navbar.Toggle aria-controls="responsive-navbar-nav" className="  "/>
-        <Navbar.Collapse id="responsive-navbar-nav" className="">
-          <Nav className=" justify-content-between " style={{ marginLeft:"auto"}}>
-              <Nav.Link as={Link} to='/home'>HOME</Nav.Link>
-           
-            <Nav.Link as={Link} to='/about'>ABOUT US</Nav.Link>
-            <NavDropdown title=" VIEW PRODUCTS" id="collasible-nav-dropdown">
-              <NavDropdown.Item as={Link} to='/recent' href="#action/3.1">Recent</NavDropdown.Item>
-              <NavDropdown.Item as={Link} to='/current' href="#action/3.2">
-                Current
-              </NavDropdown.Item>
-              <NavDropdown.Item as={Link} to='/upcoming' href="#action/3.3">Upcoming</NavDropdown.Item>
-            </NavDropdown>
-            <Nav.Link href="#features">ADD PRODUCTS</Nav.Link>
-            <Nav.Link href="#pricing">BILLING</Nav.Link>
-            <Nav.Link href="#pricing">CONTACT US</Nav.Link>
-          </Nav>
-        </Navbar.Collapse>
-      </Container>
-    </Navbar>
-    </>
-    
     <div>
-      
+      <>
+      <Navbar expand="lg" bg="light" variant="light" className="bg-body-tertiary nav-txt-font ">
+            <Container fluid>
+              <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+              <Navbar.Collapse id="responsive-navbar-nav">
+                <Nav className="justify-content-between" style={{ marginLeft: 'auto' }} defaultActiveKey="/home">
+                  <Nav.Link as={Link} to="/home" className="nav-element-hover nav-txt-color">HOME</Nav.Link>
+                  <Nav.Link as={Link} to="/about" className="nav-element-hover">ABOUT US</Nav.Link>
+                  <NavDropdown title="VIEW PRODUCTS" id="collasible-nav-dropdown"className="nav-element-hover ">
+                    <NavDropdown.Item as={Link} to="/recent"className="nav-frop-animation">Recent</NavDropdown.Item>
+                    <NavDropdown.Item as={Link} to="/current"className="nav-frop-animation">Current</NavDropdown.Item>
+                    <NavDropdown.Item as={Link} to="/upcoming"className="nav-frop-animation">Upcoming</NavDropdown.Item>
+                  </NavDropdown>
+                  <Nav.Link as={Link} to="/addproducts" className="nav-element-hover">ADD PRODUCTS</Nav.Link>
+                  <Nav.Link as={Link} to="/billing" className="nav-element-hover">BILLING</Nav.Link>
+                  <Nav.Link as={Link} to="/contact"className="nav-element-hover">CONTACT US</Nav.Link>
+                </Nav>
+              </Navbar.Collapse>
+            </Container>
+    </Navbar>
+   </>
+   
+    <div>
       <Routes>
-        <Route path='/home' element={<Home/>}/>
+        <Route path='/' element={<Home/>}/>
         <Route path='/about' element={<About/>}/>
+        <Route path='/contact' element={<Contact/>}/>
         <Route path='/recent' element={<Recent/>}/>
         <Route path='/current' element={<Current/>}/>
         <Route path='/upcoming' element={<Upcoming/>}/>
-
+        <Route path='/addproducts'element={<AddProducts/>}/>
+        <Route path='/billing' element={<Billing/>}/>
       </Routes>
 
     </div>
-
-    </div>
-    </BrowserRouter>
-
     </div>
   )
 }
