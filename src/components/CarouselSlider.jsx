@@ -25,7 +25,7 @@ const CarouselSlider = () => {
           {
             carousel.map(carousel =>{
               return(
-                <Carousel.Item key={carousel.id} interval={1000}>
+                <Carousel.Item key={carousel.id} interval={3000}>
                 <img
                     className='d-block w-100'
                     src={carousel.image}

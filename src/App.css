@@ -1,38 +1,43 @@
-.App {
-  text-align: center;
+.nav-txt-font{
+  font-family: 'Mooli', sans-serif;
 }
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.nav-element-hover
+{
+  display: inline-block;
+  position: relative;
+  color: #00806B;
 }
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+.nav-element-hover::after{
+  content: '';
+  position: absolute;
+  width: 100%;
+  transform: scaleX(0);
+  height: 2px;
+  bottom: 0;
+  left: 0;
+  background-color:#00806B;
+  transform-origin: bottom right;
+  transition: transform 0.25s ease-out;
+}
+.nav-element-hover:hover::after {
+  transform: scaleX(1);
+  transform-origin: bottom left;
+}
+.nav-frop-animation
+{
+  box-shadow: inset 0 0 0 0 #4ca64c;
+  color:black;
+  /* padding: 0 .1rem; */
+  transition: color .3s ease-in-out, box-shadow .3s ease-in-out;
+}
+.nav-frop-animation:hover{
+  box-shadow: inset 160px 0 0 0 #4ca64c;
+  color: white
+}
+.nav-txt-color{
+  display: inline-block;
+  color:black; 
+}
+.nav-txt-color:hover {
+  color: green; 
   }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}

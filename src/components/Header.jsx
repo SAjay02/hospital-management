@@ -8,12 +8,12 @@ const Header = () => {
     const [color, setColor] = useState("#00806B");
   return (
     <div style={{backgroundColor:`${color}`}}>
-    <div className="container">
-        <header className="d-flex  justify-content-sm-around">
+    <div className="container ">
+        <header className="d-flex  justify-content-sm-around nav-txt-font">
            <Logo/>
            <SearchBar/>
-           
            <Button/>
+           
         </header> 
     </div>
     </div>
