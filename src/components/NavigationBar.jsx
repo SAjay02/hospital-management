@@ -1,8 +1,5 @@
 import React from 'react'
-import Container from 'react-bootstrap/Container';
-import Nav from 'react-bootstrap/Nav';
-import Navbar from 'react-bootstrap/Navbar';
-import NavDropdown from 'react-bootstrap/NavDropdown';
+import {Nav, Navbar, Container, NavDropdown} from 'react-bootstrap'
 import {Route, Routes, Link,BrowserRouter,useLocation} from 'react-router-dom';
 import Home from './Home';
 import Recent from './Recent';
@@ -26,9 +23,9 @@ const NavigationBar = () => {
                   <Nav.Link as={Link} to="/home" className="nav-element-hover nav-txt-color">HOME</Nav.Link>
                   <Nav.Link as={Link} to="/about" className="nav-element-hover">ABOUT US</Nav.Link>
                   <NavDropdown title="VIEW PRODUCTS" id="collasible-nav-dropdown"className="nav-element-hover ">
-                    <NavDropdown.Item as={Link} to="/recent"className="nav-frop-animation">Recent</NavDropdown.Item>
-                    <NavDropdown.Item as={Link} to="/current"className="nav-frop-animation">Current</NavDropdown.Item>
-                    <NavDropdown.Item as={Link} to="/upcoming"className="nav-frop-animation">Upcoming</NavDropdown.Item>
+                    <NavDropdown.Item as={Link} to="/recent" className="nav-frop-animation">Recent</NavDropdown.Item>
+                    <NavDropdown.Item as={Link} to="/current" className="nav-frop-animation">Current</NavDropdown.Item>
+                    <NavDropdown.Item as={Link} to="/upcoming" className="nav-frop-animation">Upcoming</NavDropdown.Item>
                   </NavDropdown>
                   <Nav.Link as={Link} to="/addproducts" className="nav-element-hover">ADD PRODUCTS</Nav.Link>
                   <Nav.Link as={Link} to="/billing" className="nav-element-hover">BILLING</Nav.Link>

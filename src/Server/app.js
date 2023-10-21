@@ -1,9 +1,10 @@
 const express=require("express");
-const cors=require("cors");
+const cors = require("cors")
 const bodyParser=require("body-parser");
-const Product =require("./src/Server/models/productModels");
-const connectdb = require("./src/Server/configuration/db");
+const Product =require("./models/productModels");
+const connectdb = require("./configuration/db");
 const app=express();
+//  const productModel = require('./products')
 const PORT=process.env.PORT || 8000;
 
 app.use(express.json());
@@ -26,8 +27,12 @@ app.post("/",async(req,res)=>
             error:"Internal Server Error"
         })
     }
-}) 
+})
 
+app.get('/api/data', async (req,res)=>{
+    const products = await Product.find()
+    res.send(products)
+})
 
 
 app.listen(PORT,()=>
