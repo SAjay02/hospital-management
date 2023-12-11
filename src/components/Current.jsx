@@ -17,7 +17,6 @@ function ProductCard({product}) {
           <Card.Text>Quantity : {product.quantity}</Card.Text>
           <Card.Text>Expiry Date : {product.expiryDate}</Card.Text>
           <Card.Text>Rs.{product.cost}</Card.Text>
-
           {/* <Button
             variant="primary"
             onClick={() => incrementQuantity(product._id)}
