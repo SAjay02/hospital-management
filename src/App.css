@@ -41,3 +41,21 @@
 .nav-txt-color:hover {
   color: green; 
   }
+
+  /* AboutUs.css */
+.about-us-container {
+  margin-top: 50px;
+}
+
+.about-us-card {
+  transition: transform 0.3s ease-in-out; /* Add a smooth transition effect */
+}
+
+.about-us-card:hover {
+  transform: scale(1.05); /* Scale the card slightly on hover */
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1); /* Add a subtle box shadow on hover */
+  box-shadow: #4ca64c;
+  border-color: yellowgreen;
+}
+
+/* Additional styles can be added as needed */

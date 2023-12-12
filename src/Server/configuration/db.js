@@ -2,7 +2,7 @@ const mongoose=require("mongoose");
 const connectdb=async()=>
 {
     try {
-    const connection = await mongoose.connect("mongodb://0.0.0.0:27017/userDetails", {
+    const connection = await mongoose.connect("mongodb+srv://sivasangeeth04:sangeeth04@cluster0.5oss2x4.mongodb.net/", {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     });
@@ -11,5 +11,6 @@ const connectdb=async()=>
   } catch (err) {
     console.log(err);
   }
+  
 }
 module.exports=connectdb;
