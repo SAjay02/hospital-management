@@ -5,7 +5,6 @@ const Product =require("./src/Server/models/productModels");
 const connectdb = require("./src/Server/configuration/db");
 const app=express();
 const PORT=process.env.PORT || 8000;
-
 app.use(express.json());
 app.use(cors());
 app.use(bodyParser.json());
@@ -27,8 +26,6 @@ app.post("/",async(req,res)=>
         })
     }
 }) 
-
-
 
 app.listen(PORT,()=>
 {

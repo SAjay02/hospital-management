@@ -13,7 +13,6 @@ import Contact from './Contact';
 import { ScrollSpy } from 'bootstrap';
 import AddProducts from './AddProducts';
 import Billing from './Billing';
-
 const NavigationBar = () => {
   return (
     <div>
@@ -38,7 +37,6 @@ const NavigationBar = () => {
             </Container>
     </Navbar>
    </>
-   
     <div>
       <Routes>
         <Route path='/' element={<Home/>}/>
@@ -50,7 +48,6 @@ const NavigationBar = () => {
         <Route path='/addproducts'element={<AddProducts/>}/>
         <Route path='/billing' element={<Billing/>}/>
       </Routes>
-
     </div>
     </div>
   )
