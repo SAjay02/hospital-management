@@ -1,6 +1,7 @@
 import React from 'react'
 import { useState } from 'react'
-import { Button, Card, Col, Form, Row } from 'react-bootstrap'
+import { Button, Col, Form, Row } from 'react-bootstrap'
+import {Card} from 'react-bootstrap'
 import axios from 'axios'
 
 const AddProducts = () => {
