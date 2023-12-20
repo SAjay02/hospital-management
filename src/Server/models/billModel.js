@@ -17,8 +17,17 @@ const billSchema =  mongoose.Schema({
     selectedItems :[{
         item : String,
         quantity : Number,
+        sellingPrice : Number
         // required : true
-    }]
+    }],
+    totalSelectedPrice : {
+        type : Number,
+        required : false
+    }
+    // total_price : {
+    //     type : Number,
+    //     required : false
+    // }
 })
 
 const billModel = mongoose.model('bills',billSchema)

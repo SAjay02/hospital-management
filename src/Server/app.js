@@ -3,9 +3,11 @@
 // import { selectedItemsArray_to_backend} from '../components/Billing'
 const express=require("express");
 const cors = require("cors")
-const bodyParser=require("body-parser");
+const bodyParser=require("body-parser"); 
 const Product =require("./models/productModels");
-const Bill = require("./models/billModel")
+const Bill = require("./models/billModel") 
+
+
 const connectdb = require("./configuration/db");
 const app=express();
 //  const productModel = require('./products')
@@ -17,6 +19,8 @@ app.use(cors());
 app.use(bodyParser.json());
 
 connectdb();
+
+
 
 app.post("/",async(req,res)=>
 {
@@ -60,21 +64,28 @@ app.post('/api/updateQuantities', async (req, res) => {
   try {
     let updatedQuantities = req.body.updatedQuantities;
     const items = req.body.items;
+    const sell_price = req.body.selling
 
     // Ensure updatedQuantities is an array
     if (!Array.isArray(updatedQuantities)) {
       updatedQuantities = [updatedQuantities];
     }
-
+    let totalPrice = 0;
     // Update quantities in the database
     for (const updatedItem of updatedQuantities) {
 
       const existingItem = await Product.findOne({ name: updatedItem.item });
       if (existingItem) {
         existingItem.quantity -= updatedItem.quantity;
+
+        const itemPrice = existingItem.selling || 0;
+        totalPrice += updatedItem.quantity * itemPrice;
+
         await existingItem.save();
       }
     }
+
+    
 
     res.send('Quantities updated successfully!');
   } catch (error) {
@@ -93,10 +104,10 @@ app.get('/api/data', async (req,res)=>{
     availableProducts.push(products)
     res.send(products)
 })
-
+  
 app.get('/api/items', async (req, res) => {
     try {
-      const items = await Product.find().select('name').select('quantity'); // Fetching names of items
+      const items = await Product.find().select('name').select('quantity').select('selling'); // Fetching names of items
       res.json(items);
     } catch (error) {
       res.status(500).json({ error: 'Could not fetch data' });

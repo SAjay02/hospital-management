@@ -6,21 +6,22 @@ import axios from 'axios'
 // const product = require('../Server/mod/els/productModels')
 // import {availableProducts} from '../Server/app.js'
 // const product = require('../Server/app.js')
-export const selectedItemsArray_to_backend =[{}]
 const Billing = () => {
-  // console.log('billdata : ',billData)
-  const [name, setName] = useState('');
-  const [validated, setValidated] = useState(false);
 
-    const [email, setEmail] = useState('');
-    const [phoneNumber, setPhoneNumber] = useState('');
-    const [selectedItems, setSelectedItems] = useState({});
+  const [name, setName] = useState('');
+  const [total_price, setTotal_price] = useState('');
+  const [validated, setValidated] = useState(false);
+  const [email, setEmail] = useState('');
+  const [phoneNumber, setPhoneNumber] = useState('');
+  const [selectedItems, setSelectedItems] = useState({});
 
 /* ------------------ DROPDOWN ------------------*/
-const [items, setItems] = useState([]);
+  const [items, setItems] = useState([]);
   const [selectedItem, setSelectedItem] = useState('');
   const [quantity, setQuantity] = useState('');
-  const [ selectedData, setSelectedData] = useState({});
+  const [ selectedData, setSelectedData] = useState({
+    items : [],
+  });
 
   const handleName = (e) =>{
     setName(e.target.value)
@@ -40,25 +41,44 @@ const [items, setItems] = useState([]);
   
   const handleAddProductsClick = (event) => {
     event.preventDefault();
-
-    // Check if both item and quantity are provided
+  
+    // Check if both item, quantity, and selling price are provided
     if (selectedItem && quantity) {
       setSelectedData((prevSelectedData) => {
-        // datas.push(selectedData)
+        // Find the selected item
+        const selectedItemData = items.find((item) => item.name === selectedItem);
+        const totalPrice = calculateTotalPrice(selectedItemData, quantity);
+
         // Use the previous state to avoid overwriting existing data
         return {
           ...prevSelectedData,
-          [selectedItem]: parseInt(quantity, 10),
+          items: [
+            ...prevSelectedData.items,
+            {
+              item: selectedItem,
+              quantity: parseInt(quantity, 10),
+              sellingPrice: selectedItemData ? cleanAndParseSellingPrice(selectedItemData.selling) : 0,
+              totalPrice: totalPrice,
+
+            },
+          ],
         };
       });
-      
     }
-
+  
     // Clear the selected item and quantity after processing
     setSelectedItem('');
     setQuantity('');
   };
 
+  const calculateTotalPrice = (selectedItemData, quantity) => {
+    const sellingPrice = selectedItemData ? cleanAndParseSellingPrice(selectedItemData.selling) : 0;
+    return sellingPrice * parseInt(quantity, 10);
+  };
+  const cleanAndParseSellingPrice = (sellingPriceString) => {
+    const cleanedPrice = sellingPriceString.replace(/[^\d.]/g, ''); // Remove non-numeric characters
+    return parseFloat(cleanedPrice) || 0; // Parse to float, default to 0 if parsing fails
+  };
   const handleItemSelect = (event) => {
     const selectedItem = event.target.value;
     setSelectedItem(selectedItem);
@@ -70,74 +90,32 @@ const [items, setItems] = useState([]);
   };
 /* ------------------ DROPDOWN ------------------*/
 
-    const handleProductSelect = (selectedProduct) => {
-     
-    setSelectedItems((prevItems) => {
-      const updatedItems = { ...prevItems };
-      updatedItems[selectedProduct] = (updatedItems[selectedProduct] || 0) + 1;
-      return updatedItems;
-     }
-  )
-  // console.log("selected product : ", selectedProduct)
 
-  // setSelectedItems(billData)
-};
-  // {console.log(selectedItems)}
-  // const handleQuantityChange = (product, newQuantity) => {
-  //   setSelectedItems((prevItems) => {
-  //     const updatedItems = { ...prevItems };
-  //     updatedItems[product] = newQuantity;
-  //     return updatedItems;
-  //   });
-  // };
-
-  // const handleRemoveItem = (product) => {
-  //   setSelectedItems((prevItems) => {
-  //     const updatedItems = { ...prevItems };
-  //     delete updatedItems[product];
-  //     return updatedItems;
-  //   });
-  // };
-
-  // const handleSubmit = (event) => {
-  //   event.preventDefault();
-  //   // Access the form data, including selected items
-  //   console.log({
-  //     name,
-  //     email,
-  //     phoneNumber,
-  //     selectedItems,
-  //   });
-  //   // Convert selected items to JSON string for display
-  //   const selectedItemsJson = JSON.stringify(selectedItems, null, 2);
-  //   console.log(selectedItemsJson);
-  //   // Add logic to further process or store the form data
-  // };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     setValidated(true);
   
     try {
-      const selectedItemsArray = Object.keys(selectedData).map((itemName) => ({
-        item: itemName,
-        quantity: selectedData[itemName],
-      }));
+      const selectedItemsArray = selectedData.items.map((selectedItem) => ({
+        item: selectedItem.item,
+        quantity: selectedItem.quantity,
+        sellingPrice: selectedItem.sellingPrice,
+        totalPrice: selectedItem.totalPrice,
 
-      // // console.log("selectedItemsArray : ",selectedItemsArray)
+      }));
       console.log("items :  ", items)
-      // console.log("selecteditemarray : ", selectedItemsArray)
-      // selectedItemsArray_to_backend = Object.keys(selectedData).map((itemName) => ({
-      //   name: itemName,
-      //   quantity: selectedData[itemName],
-      // }));
-  
+      
+      const totalSelectedPrice = selectedItemsArray.reduce((total, item) => total + item.totalPrice, 0);
+
       // Send data to the billing endpoint
       await axios.post('http://localhost:8000/bill', {
         name,
         email,
         mob_number: phoneNumber,
         selectedItems: selectedItemsArray,
+        totalSelectedPrice: totalSelectedPrice,
+
       });
   
       // Send data to the updateQuantities endpoint
@@ -152,14 +130,10 @@ const [items, setItems] = useState([]);
     }
   };
   const computeRemainingQuantity = (itemName) => {
-    const selectedQuantity = selectedData[itemName] || 0;
+    const selectedQuantity = selectedData.items.find((selectedItem) => selectedItem.item === itemName)?.quantity || 0;
     const originalQuantity = items.find((item) => item.name === itemName)?.quantity || 0;
     return originalQuantity - selectedQuantity;
   };
-
-  // {console.log("items : ",items)}
-  // {console.log("selected data : ",selectedData)}
-
 
 
   return (
@@ -183,9 +157,7 @@ const [items, setItems] = useState([]);
       
       <Form.Group className="mb-3" controlId="formBasicPassword">
         <Form.Label>Choose your products</Form.Label>
-        {/* <Dropdown onChange={handleProductSelect} /> */}
-
-        {/* DropDOwn */}
+     
         <div>
         <label>Select an item: </label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         <select onChange={handleItemSelect} value={selectedItem}>
@@ -212,23 +184,21 @@ const [items, setItems] = useState([]);
       <br />
       <Button variant="success"onClick={handleAddProductsClick}>Add Products</Button>
       
-      {/* <Billing dataToSend={selectedData}/> */}
       <hr />
       <div>
-        <label>Selected Data:</label>
-        {Object.keys(selectedData).length > 0 ? (
-  <ul>
-    {Object.keys(selectedData).map((item, index) => (
-      <li key={index}>
-        Product: {item} - Quantity: {selectedData[item]}
-      </li>
-    ))}
-  </ul>
-) : (
-  <p>No selected data.</p>
-)}
-      </div>
-        {/* DropDOwn */}
+  <label>Selected Data:</label>
+  {selectedData.items.length > 0 ? (
+    <ul>
+      {selectedData.items.map((selectedItem, index) => (
+        <li key={index}>
+          Product: {selectedItem.item} - Quantity: {selectedItem.quantity} - Selling Price: ${selectedItem.sellingPrice}
+        </li>
+      ))}
+    </ul>
+  ) : (
+    <p>No selected data.</p>
+  )}
+</div>
       </Form.Group>
          <Button variant="success" type='submit'>Submit </Button> 
     </Form>
@@ -237,4 +207,3 @@ const [items, setItems] = useState([]);
 }
 
 export default Billing
-// export {selectedItemsArray_to_backend}
