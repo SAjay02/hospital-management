@@ -6,12 +6,14 @@ import Button from './Button';
 import CarouselSlider from './CarouselSlider';
 const Header = () => {
     const [color, setColor] = useState("#00806B");
+    const [selectedProduct, setSelectedProduct] = useState(null);
+
   return (
     <div style={{backgroundColor:`${color}`}}>
     <div className="container ">
         <header className="d-flex  justify-content-sm-around nav-txt-font">
            <Logo/>
-           <SearchBar/>
+           <SearchBar setSelectedProduct={setSelectedProduct}/>
            <Button/>
            
         </header> 
