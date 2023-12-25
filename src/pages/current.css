@@ -1,0 +1,5 @@
+.card-body:hover {
+    transform: scale(1.05); /* Adjust the scale factor for the desired hover effect */
+    transition: transform 0.3s ease; /* Add a smooth transition effect */
+    /* background-color: green; */
+  }

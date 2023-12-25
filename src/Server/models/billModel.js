@@ -1,21 +1,35 @@
 const mongoose = require('mongoose')
 
 
-const billSchema = new mongoose.Schema({
-    item : String,
-    quantity : Number
+const billSchema =  mongoose.Schema({
+    name : {
+        type : String,
+        required : false
+    },
+    email : {
+        type : String,
+        required : false
+    },
+    mob_number : {
+        type : String,
+        required : false
+    },
+    selectedItems :[{
+        item : String,
+        quantity : Number,
+        sellingPrice : Number
+        // required : true
+    }],
+    totalSelectedPrice : {
+        type : Number,
+        required : false
+    }
+    // total_price : {
+    //     type : Number,
+    //     required : false
+    // }
 })
 
-billSchema.set('toJSON', {
-    transform: function (doc, ret) {
-      ret.id = ret._id;
-      delete ret._id;
-      delete ret.__v;
-      // Handle any other transformations you need
-    },
-  });
-
-  
-const billModel = new mongoose.model("bills",billSchema)
-module.exports = mongoose.model("bills",billSchema)
+const billModel = mongoose.model('bills',billSchema)
+module.exports = mongoose.model('bills',billSchema)
 exports.billModel = billModel

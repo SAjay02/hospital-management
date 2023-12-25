@@ -76,6 +76,7 @@ const [items, setItems] = useState([]);
       .catch((error) => console.error(error));
   }, []);
 
+  
   const handleAddProductsClick = (event) => {
     event.preventDefault();
 
@@ -92,6 +93,7 @@ const [items, setItems] = useState([]);
           },
         ];
       });
+      
     }
 
     // Clear the selected item and quantity after processing
@@ -138,6 +140,8 @@ const [items, setItems] = useState([]);
       )}
       <br />
       <Button variant="success"onClick={handleAddProductsClick}>Add Products</Button>
+      
+      {/* <Billing dataToSend={selectedData}/> */}
       <hr />
       <div>
         <label>Selected Data:</label>
@@ -153,7 +157,6 @@ const [items, setItems] = useState([]);
           <p>No selected data.</p>
         )}
       </div>
-
     </div>
     
   );

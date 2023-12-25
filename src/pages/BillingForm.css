@@ -1,0 +1,12 @@
+.input-with-padding {
+    padding: 10px;  /* Adjust the padding value as needed */
+    width: 200px;
+  }
+
+  .form-body{
+    padding-left: 25px;
+    padding-top: 5px;
+  }
+
+  .form-btn{
+  }
