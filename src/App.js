@@ -1,4 +1,4 @@
-import logo from './logo.svg';
+import {useState} from 'react'
 import './App.css';
 import HomePage from './pages/HomePage';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -14,6 +14,8 @@ import Contact from './components/Contact';
 import Billing from './components/Billing';
 import Home from './components/Home';
 function App() {
+  const [selectedProduct, setSelectedProduct] = useState(null);
+
   return (
     <>
       <HomePage/>
@@ -23,7 +25,7 @@ function App() {
         <Route Component={CarouselSlider} path='/'></Route>
         <Route Component={About} path='/'></Route>
         <Route Component={Recent} path='/'></Route>
-        <Route Component={Current} path='/'></Route>
+        <Route selectedProduct={selectedProduct} Component={Current} path='/'></Route>
         <Route Component={Upcoming} path='/'></Route>
         <Route Component={AddProducts} path='/'></Route>
         <Route Component={Billing} path='/'></Route>

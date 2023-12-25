@@ -6,7 +6,7 @@ import axios from 'axios'
 import '../pages/BillingForm.css'
 import { saveAs } from 'file-saver';
 import { Document, Page } from 'react-pdf';
-import { PDFDocument } from 'pdf-lib'; // Corrected import
+import { PDFDocument,rgb} from 'pdf-lib'; // Corrected import
 
 // import {generatePDF} from '../pages/pdfGenerator'
 // const product = require('../Server/mod/els/productModels')
@@ -55,23 +55,44 @@ const Billing = () => {
       const page = pdfDoc.addPage();
       const { width, height } = page.getSize();
 
-      // Add content to the PDF (customize this based on your data)
-      page.drawText(`Name: ${name}`, { x: 50, y: height - 50 });
-      page.drawText(`Email: ${email}`, { x: 50, y: height - 70 });
-      page.drawText(`Phone Number: ${phoneNumber}`, { x: 50, y: height - 90 });
+      // const font = await pdfDoc.embedFont(PDFDocument.Font.Helvetica);
 
-      // Add details of selected items
-      selectedData.items.forEach((item, index) => {
-        const yOffset = height - 120 - index * 20;
-        page.drawText(`Product: ${item.item} - Quantity: ${item.quantity} - Selling Price: ${item.sellingPrice}`, {
-          x: 50,
-          y: yOffset,
-        });
-      });
+      // Add a title
+      page.drawText('Invoice', { x: 50, y: height - 50,  size: 24, color: rgb(0, 0, 0) });
+  
+     // Add customer details
+    page.drawText(`Name: ${name}`, { x: 50, y: height - 80 });
+    page.drawText(`Email: ${email}`, { x: 50, y: height - 105 });
+    page.drawText(`Phone Number: ${phoneNumber}`, { x: 50, y: height - 130 });
 
-      const totalYOffset = height - 120 - selectedData.items.length * 20 - 20;
-      page.drawText(`Total Price: ${totalPrice}`, { x: 50, y: totalYOffset });
+    // Add a separator line
+    page.drawLine({ start: { x: 50, y: height - 140 }, end: { x: width - 50, y: height - 140 }, thickness: 2, color: rgb(0, 0, 0) });
 
+    // Add table header
+    let yOffset = height - 170;
+    page.drawText('Product', { x: 50, y: yOffset, });
+    page.drawText('Quantity', { x: 200, y: yOffset, });
+    page.drawText('Unit Price', { x: 350, y: yOffset, });
+    page.drawText('Total ', { x: 500, y: yOffset, });
+
+    // Add a separator line
+    page.drawLine({ start: { x: 50, y: yOffset - 15 }, end: { x: width - 50, y: yOffset - 10 }, thickness: 2, color: rgb(0, 0, 0) });
+
+    // Add details of selected items in a table-like layout
+    selectedData.items.forEach((item) => {
+      yOffset -= 50;
+      page.drawText(item.item, { x: 50, y: yOffset });
+      page.drawText(item.quantity.toString(), { x: 200, y: yOffset });
+      page.drawText(item.sellingPrice.toString(), { x: 350, y: yOffset });
+      page.drawText(item.totalPrice.toString(), { x: 500, y: yOffset });
+    });
+
+    // Add a separator line
+    page.drawLine({ start: { x: 50, y: yOffset - 15 }, end: { x: width - 50, y: yOffset - 10 }, thickness: 2, color: rgb(0, 0, 0) });
+
+    // Add the total price
+    yOffset -= 30;
+    page.drawText(`Total Amount: ${totalPrice}`, { x: 50, y: yOffset-20 });
       // Convert the PDF document to bytes
       const pdfBytes = await pdfDoc.save();
 
@@ -245,6 +266,7 @@ const Billing = () => {
   // };
 
   return (
+    <>
     <Form className="form-body" action="POST" onSubmit={handleSubmit} noValidate  validated={validated}>
        <Form.Group className="mb-3" controlId="formBasicEmail">
         <Form.Label >Name</Form.Label>
@@ -317,7 +339,7 @@ const Billing = () => {
           Generate Bill
         </Button>
     </Form>
-   
+   </>
   );
 }
 

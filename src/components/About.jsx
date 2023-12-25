@@ -8,16 +8,16 @@ import {Card, Container, Row, Col} from 'react-bootstrap'
 import '../App.css';
 const teamMembers = [
   {
-    name: 'John Doe',
+    name: 'Ajay',
     role: 'Founder & CEO',
-    bio: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-    description: 'John is the visionary leader behind our company, bringing years of experience and expertise.',
+    // bio: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+    description: 'Ajay is the visionary leader behind our company, bringing years of experience and expertise.',
   },
   {
-    name: 'Jane Smith',
+    name: 'Sangeeth',
     role: 'Lead Developer',
-    bio: 'Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
-    description: 'Jane leads our development team, ensuring the successful execution of projects with her technical prowess.',
+    // bio: 'Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+    description: 'Sangeeth leads our development team, ensuring the successful execution of projects with his technical prowess.',
   },
   // Add more team members as needed
 ];
