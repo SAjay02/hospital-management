@@ -47,8 +47,6 @@ app.post("/bill",async(req,res)=>
     }
 })
 
-
-
 app.get('/api/data', async (req,res)=>{
     const products = await Product.find()
     availableProducts.push(products)
