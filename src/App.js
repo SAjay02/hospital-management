@@ -13,6 +13,7 @@ import AddProducts from './components/AddProducts';
 import Contact from './components/Contact';
 import Billing from './components/Billing';
 import Home from './components/Home';
+import Footer from './components/Footer';
 function App() {
   const [selectedProduct, setSelectedProduct] = useState(null);
 
@@ -31,6 +32,7 @@ function App() {
         <Route Component={Billing} path='/'></Route>
         <Route Component={Contact} path='/'></Route>
       </Routes>
+      <Footer/>
     </>
   );
 }

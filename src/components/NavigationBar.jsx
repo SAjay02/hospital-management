@@ -10,7 +10,6 @@ import Contact from './Contact';
 import { ScrollSpy } from 'bootstrap';
 import AddProducts from './AddProducts';
 import Billing from './Billing';
-
 const NavigationBar = () => {
   return (
     <div>

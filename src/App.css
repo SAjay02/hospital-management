@@ -59,3 +59,16 @@
 }
 
 /* Additional styles can be added as needed */
+
+
+.dropdown-item
+{
+  box-shadow: inset 0 0 0 0 #4ca64c;
+  color:black;
+  /* padding: 0 .1rem; */
+  transition: color .3s ease-in-out, box-shadow .3s ease-in-out;
+}
+.dropdown-item:hover{
+  box-shadow: inset 160px 0 0 0 #4ca64c;
+  color: white
+}
