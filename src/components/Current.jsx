@@ -5,17 +5,44 @@ import { Container, Row, Modal, Button, Card, Col } from 'react-bootstrap';
 import '../pages/current.css'
 import { Document, Page, pdfjs } from 'react-pdf';
 import { PDFDocument } from 'pdf-lib';
+import MIMG1 from '../assests/calpol.png'
+import MIMG2 from '../assests/paracetamol.jpg'
+import MIMG3 from '../assests/citrizine.png'
 
 function ProductCard({ product }) {
+
+
+  const imageDetails = [
+    {
+      batch : 1,
+      url : MIMG1
+    },
+    {
+      batch : 2,
+      url : MIMG3
+    },
+    {
+      batch : 3,
+      url : MIMG2
+    }
+
+]
   const [showModal, setShowModal] = useState(false);
 
   const handleShow = () => setShowModal(true);
   const handleClose = () => setShowModal(false);
 
+  const selectedImage = imageDetails.find((img) => img.batch == product.batch)?.url;
+
   return (
     <Col xs={12} sm={6} md={4} lg={3}>
       <Card className='card-body' style={{ width: '300px', height: '500px' }} onClick={handleShow}>
-        <Card.Img style={{ minHeight: '1px' }} variant="top" src={"#"} />
+        {console.log(product.batch)}
+        <Card.Img style={{ minHeight: '1px' }} 
+                  variant="top" 
+                  src={selectedImage}
+                  onClick={() => console.log('Image clicked')}
+        />
         <Card.Body>
           <Card.Title>{product?.name}</Card.Title>
         </Card.Body>
@@ -99,3 +126,4 @@ function ProductDetailsModal({ show, onHide, product }) {
   );
 }
 export default Current;
+export {ProductCard}

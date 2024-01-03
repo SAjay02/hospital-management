@@ -113,18 +113,6 @@ app.get('/api/items', async (req, res) => {
       res.status(500).json({ error: 'Could not fetch data' });
     }
   });
-  app.post('/api/storeSelectedData', async (req, res) => {
-    try {
-      const { selectedData } = req.body;
-      const savedData = await SelectedData.create(selectedData);
-      res.status(201).json(savedData);
-    } catch (error) {
-      console.error(error);
-      res.status(500).json({ error: 'Internal Server Error' });
-    }
-  });
-
-
   app.get("/bill",(req,res)=>{
     const bill = Bill.find();
     res.send(bill);
@@ -136,6 +124,6 @@ app.listen(PORT,()=>
 })
 // console.log("first")
 // console.log(availableProducts)
-
 module.exports=app; 
 module.exports = availableProducts
+
