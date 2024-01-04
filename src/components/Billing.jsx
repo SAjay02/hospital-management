@@ -3,15 +3,17 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Dropdown from './Dropdown';
 import axios from 'axios'
+import {Card, Container, Row} from 'react-bootstrap'
 import '../pages/BillingForm.css'
 import { saveAs } from 'file-saver';
 import { Document, Page } from 'react-pdf';
 import { PDFDocument,rgb} from 'pdf-lib'; // Corrected import
-
+// import {ProductCard} from './Current'
 // import {generatePDF} from '../pages/pdfGenerator'
 // const product = require('../Server/mod/els/productModels')
 // import {availableProducts} from '../Server/app.js'
 // const product = require('../Server/app.js')
+
 const Billing = () => {
 
   const [name, setName] = useState('');
@@ -344,3 +346,45 @@ const Billing = () => {
 }
 
 export default Billing
+
+// const Billing = () =>{
+
+//   const [data, setData] = useState([]);
+//   const [selectedProduct, setSelectedProduct] = useState(null);
+
+//   useEffect(() => {
+//     axios.get('http://localhost:8000/api/data')
+//       .then((response) => {
+//         setData(response.data);
+//       })
+//       .catch((error) => {
+//         console.error(error);
+//       });
+//   }, []);
+
+//   const handleCardClick = (product) => {
+//     setSelectedProduct(product);
+//   };
+
+//   return(
+//     <div className="card">
+//     <Container>
+//       <Row className='first-content'>
+//         {data.map((product) => (
+//           <ProductCard
+//             key={product.id}
+//             product={product}
+//             onClick={() => handleCardClick(product)}
+//           />
+//         ))}
+//       </Row>
+//       <Row>
+        
+//       </Row>
+//     </Container>
+//     </div>
+//   );
+// }
+
+
+// export default Billing
