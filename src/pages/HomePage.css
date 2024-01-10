@@ -1,3 +1,11 @@
 img{
     height: 550px;
 }
+
+.logout-logo{
+    transition: transfrom 1s ease-in;
+}
+
+.logout-logo :hover .nav-element-hover{
+    transform: rotateX(30%);
+}

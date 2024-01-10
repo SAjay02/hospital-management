@@ -1,0 +1,34 @@
+.form-control{
+
+}
+
+@media screen and (Max-width : 500px)
+{
+    .input-group{
+        margin-top: 65px;  
+        margin-left: -55px;  
+        z-index: 1;
+    }   
+
+}
+
+@media screen and (Max-width : 1024px)
+{
+    .input-group{
+        margin-top: 60px;  
+        margin-left: -55px;  
+        z-index: 1;
+    }
+
+}
+
+
+@media screen and (Min-width : 768px)
+{
+    .input-group{
+        /* padding-bottom: 25px; */
+        margin-top: 0px;
+        /* margin-left: -50px; */
+    }
+
+}

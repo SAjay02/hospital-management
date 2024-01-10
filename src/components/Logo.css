@@ -1,0 +1,30 @@
+.head_cont{
+    /* margin-left: 50px; */
+}
+
+@media screen and (Max-Width:500px){
+    .head_cont
+    {
+        /* margin-left: 250px; */
+        margin-top: 15px;
+    }
+}
+
+@media screen and (Max-Width:1024px){
+    .head_cont
+    {
+        margin-top: px;
+        margin-left: 150px;  
+        
+    }
+}
+
+@media screen and (Min-width : 768px)
+{
+    .head_cont{
+        /* padding-top: 10px; */
+        margin-left: -100px;
+    }
+
+}
+

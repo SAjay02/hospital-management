@@ -1,11 +1,13 @@
 .nav-txt-font{
   font-family: 'Mooli', sans-serif;
+  /* margin-bottom: 10px; */
 }
 .nav-element-hover
 {
   display: inline-block;
   position: relative;
   color: #00806B;
+  font-style: italic;
 }
 .nav-element-hover::after{
   content: '';

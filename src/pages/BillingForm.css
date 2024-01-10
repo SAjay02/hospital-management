@@ -8,5 +8,132 @@
     padding-top: 5px;
   }
 
-  .form-btn{
+  .billing-btn {
+    padding: 0.8em 1.8em;
+    padding-left: 5px;
+
+
+    border: 2px solid #00806B;
+    position: relative;
+    overflow: hidden;
+    background-color: transparent;
+    border-radius: 5px;
+    width: 155px;
+    height: 50px;
+    text-align: center;
+    text-transform: uppercase;
+    font-size: 13px;
+    transition: .3s;
+    z-index: 1;
+    font-family: inherit;
+    font-weight: bold;
+    font-style: italic;
+    color: #00806B;
+   }
+   
+   .billing-btn::before {
+    content: '';
+    width: 0;
+    height: 300%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(45deg);
+    background: #00806B;
+    transition: .5s ease;
+    display: block;
+    z-index: -1;
+   }
+   
+   .billing-btn:hover::before {
+    width: 105%;
+   }
+   
+   .billing-btn:hover {
+    color: #ffff;
+   }
+
+   
+.icon {
+  transition: transform 0.5s ease-in;
+}
+.submit-btn-icon{
+  transition: tranform 1s ease-in;
+}
+
+.billing-btn:hover .submit-btn-icon{
+  transform: translateY(-100%);
+}
+.billing-btn:hover .icon {
+  transform: translateX(720%); 
+}
+   button {
+    cursor: pointer;
+    padding: 0 6px;
+    min-width: 88px;
+    min-height: 36px;
   }
+  
+  .controls {
+    padding: 24px;
+  }
+  
+  
+  .modal-body{
+    background: rgb(203,225,255);
+    background: linear-gradient(90deg, rgba(203,225,255,1) 0%, rgba(142,209,220,1) 54%, rgba(125,187,195,1) 100%);
+    color: black;
+    
+  }
+span{
+  font-style: italic;
+  font-weight: 500;
+}
+
+
+.add-prod-btn{
+  margin-left: 100px;
+}
+.bill-btn{
+  margin-left: 100px;
+
+}
+.submit-btn{
+  margin-left: 500px;
+  margin-bottom: 5px;
+}
+
+@media screen and (Max-width : 600px){
+  .submit-btn{
+    margin-left: 100px;
+    margin-bottom: 15px;
+  }
+  .bill-btn{
+    margin-left: 100px;
+  }
+}
+
+@media screen and (Max-width : 1024px){
+  .submit-btn{
+    margin-left: 100px;
+    margin-bottom: 15px;
+  }
+  .bill-btn{
+    margin-left: 100px;
+  }
+}
+
+.submit-btn-icon {
+  transition: transform 0.3s ease-in-out;
+}
+
+.billing-btn:hover .submit-btn-icon {
+  transform: translateY(-2px);
+  animation: bounce 0.5s infinite alternate; 
+}
+
+@keyframes bounce {
+  to {
+    transform: translateY(-10px);
+  }
+}

@@ -7,6 +7,9 @@ import {Card, Container, Row} from 'react-bootstrap'
 import '../pages/BillingForm.css'
 import { saveAs } from 'file-saver';
 import { Document, Page } from 'react-pdf';
+import { MdOutlineProductionQuantityLimits } from "react-icons/md";
+import { BiSolidAddToQueue } from "react-icons/bi";
+import { FaHornbill } from "react-icons/fa";
 import { PDFDocument,rgb} from 'pdf-lib'; // Corrected import
 // import {ProductCard} from './Current'
 // import {generatePDF} from '../pages/pdfGenerator'
@@ -269,6 +272,8 @@ const Billing = () => {
 
   return (
     <>
+    <div className="container mt-5 mb-5 ">
+
     <Form className="form-body" action="POST" onSubmit={handleSubmit} noValidate  validated={validated}>
        <Form.Group className="mb-3" controlId="formBasicEmail">
         <Form.Label >Name</Form.Label>
@@ -314,9 +319,12 @@ const Billing = () => {
         </div>
       )}
       <br />
-      <Button style={{ marginLeft: '100px' }}  variant="success"onClick={handleAddProductsClick}>Add Products</Button>
-      
+      <div className='add-prod-btn'>
+      <button className='billing-btn'   onClick={handleAddProductsClick}><MdOutlineProductionQuantityLimits size={17} className='icon'/>Add Products</button>
+      </div>
+        
       <hr />
+
       <div>
   <label>Selected Data:</label>
   {selectedData.items.length > 0 ? (
@@ -332,21 +340,28 @@ const Billing = () => {
   )}
 </div>
       </Form.Group>
-         <Button style={{ marginLeft: '100px' }} className="form-btn" variant="success" type='submit'>Submit </Button> 
-          {/* <Button variant="primary" type="button" onClick={handleDownloadBill}>
-          Download Bill
-        </Button> */}
+      <div className='submit-btn'>
+         <button  className='billing-btn' type='submit'> <BiSolidAddToQueue size={17} className='submit-btn-icon'/>Submit </button> 
+        </div>
+      <div className='bill-btn'>
+        <button type="submit" className='billing-btn' onClick={handleGenerateBill}>
+          <FaHornbill size={17} className='icon' />Generate Bill
+        </button>
+      </div>
 
-<Button variant="success" type="submit" onClick={handleGenerateBill}>
-          Generate Bill
-        </Button>
-    </Form>
+    </Form><br />
+    </div>
+
    </>
   );
 }
 
 export default Billing
 
+
+// style={{ marginLeft: '100px' }}
+// style={{ marginLeft: '600px' }}
+// style={{ marginLeft: '250px' }}
 // const Billing = () =>{
 
 //   const [data, setData] = useState([]);
