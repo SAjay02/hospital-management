@@ -1,6 +1,4 @@
 import React from 'react'
-import {Image} from "react-bootstrap"
-import logo from '../assests/Logo.png'
 import { useState } from 'react'
 import {MDBIcon} from 'mdb-react-ui-kit'
 import "./Logo.css"
@@ -10,8 +8,8 @@ const Logo = () => {
     <div className="d-flex head_cont">
       
          {/* <Image style={{maxWidth:"10%",maxHeight:"auto"}} className="img-fluid rounded-5" src={logo} rounded/> */}
-         <h3 style={{color:`${color1}`}} className="mt mt-md-3 "><MDBIcon style={{color:'whitesmoke'}  }icon='gem'
-         className='me-1'/>Health</h3>
+         <MDBIcon style={{color:'whitesmoke'}}icon='gem' size='xl' className='icon me-1'/>
+         <h3 style={{color:`${color1}`}} className="mt mt-md-3 ">Health</h3>
          <h3 style={{color:"white "}} className="mt   mt-md-3">Care</h3>
     </div>
   )

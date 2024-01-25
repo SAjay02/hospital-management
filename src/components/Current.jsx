@@ -6,12 +6,13 @@ import { Document, Page, pdfjs } from 'react-pdf';
 import { PDFDocument } from 'pdf-lib';
 import '../pages/BillingForm.css'
 import MIMG1 from '../assests/calpol.png'
-import MIMG2 from '../assests/paracetamol.jpg'
+import MIMG2 from '../assests/paracetamol.png'
 import MIMG3 from '../assests/citrizine.png'
 import { MdOutlineDescription } from "react-icons/md";
 import { MdOutlineProductionQuantityLimits } from "react-icons/md";
 import { BsCalendar2DateFill } from "react-icons/bs";
 import { GiMoneyStack } from "react-icons/gi";
+import { FaArrowRight } from "react-icons/fa6";
 function ProductCard({ product }) {
 
 
@@ -38,24 +39,38 @@ function ProductCard({ product }) {
   const selectedImage = imageDetails.find((img) => img.batch == product.batch)?.url;
 
   return (
+    <>
     <Col xs={12} sm={6} md={4} lg={3}>
-      <Card className='card-body' style={{ width: '300px', height: '350px' }} onClick={handleShow}>
-        {console.log(product.batch)}
-        <Card.Img style={{ minHeight: '1px' }} 
+      <div className=''>
+      
+      <Card  className='card-body1'style={{ width: '300px', height: '350px',  }} onClick={handleShow}>
+        <Card.Img className="card-image" style={{ minHeight: '1px', width:'300px', height:'300px' }} 
                   variant="top" 
                   src={selectedImage}
         />
-        <Card.Body>
+        <div className='go-arrow go-corner' ><FaArrowRight size={12} /></div>
           <Card.Title>{product?.name}</Card.Title>
-        </Card.Body>
       </Card>
+        {/* <div className="card">
+    <p className="card-title">Product Name</p>
+    <p className="small-desc">
+      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat veritatis
+      nobis saepe itaque rerum nostrum aliquid obcaecati odio officia deleniti.
+      Expedita iste et illum, quaerat pariatur consequatur eum nihil itaque!
+    </p>
+    <div className="go-corner">
+      <div className="go-arrow">→</div>
+    </div>
+  </div> */}
 
+      </div>
       <ProductDetailsModal
         show={showModal}
         onHide={handleClose}
         product={product}
       />
     </Col>
+    </>
   );
 }
 
@@ -83,8 +98,8 @@ const Current = () => {
 
   return (
     <div className="App">
-      <Container>
-        <Row>
+      <Container >
+        <Row > 
           {data.map((product) => (
             <ProductCard
               key={product.id}
@@ -114,14 +129,13 @@ function ProductDetailsModal({ show, onHide, product }) {
         <Modal.Title style={{fontStyle:'italic'}}>{(product.name).toUpperCase()} Details</Modal.Title>
       </Modal.Header>
       <Modal.Body >
-        {/* Display other product details here */}
-        <p><span><MdOutlineDescription size={30}/>:  &nbsp;</span> {product.description}</p>
-        <p><span><MdOutlineProductionQuantityLimits size={30} /> :  &nbsp;</span>{product.quantity}</p>
-        <p><span>EXPIRY <BsCalendar2DateFill size={30} /> :  &nbsp;</span>{product.expiryDate}</p>
-        <p><span><GiMoneyStack size={30}/> : Rs.</span>{product.cost}</p>
+        <p><span>DESCRIPTION <MdOutlineDescription size={30}/>:  &nbsp;</span> {product.description}</p>
+        <p><span>QUANTITY <MdOutlineProductionQuantityLimits size={30} /> :  &nbsp;</span>{product.quantity}</p>
+        <p><span>EXPIRY DATE <BsCalendar2DateFill size={30} /> :  &nbsp;</span>{product.expiryDate}</p>
+        <p><span>COST <GiMoneyStack size={30}/> : Rs.</span>{product.cost}</p>
       </Modal.Body>
       <Modal.Footer   >
-        <button className='billing-btn'variant="secondary" onClick={onHide}>
+        <button className='in-button billing-btn'variant="secondary" onClick={onHide}>
           Close
         </button>
       </Modal.Footer>

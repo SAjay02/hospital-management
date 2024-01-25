@@ -10,6 +10,8 @@ const Header = ({currentUser}) => {
     const [color, setColor] = useState("#00806B");
     const [selectedProduct, setSelectedProduct] = useState(null);
 
+
+
   return (
     <div style={{backgroundColor:`${color}`}}>
     <div className="container ">
@@ -17,7 +19,8 @@ const Header = ({currentUser}) => {
            <Logo/>
            <SearchBar setSelectedProduct={setSelectedProduct}/>
            <Button/>
-          <h5 style={{color:"white", marginTop:"17px", marginLeft:"800px"}}> <HiOutlineUserCircle style={{marginTop:"-1px"}} size={30}/> Hello {currentUser?.email}</h5>
+          <h5 style={{color:"white", marginTop:"17px", marginLeft:"800px"}}> 
+          <HiOutlineUserCircle style={{marginTop:"-1px"}} size={30}/> Hello {currentUser?.email.substr(0,currentUser?.email.indexOf('@'))}</h5>
 
         </header> 
     </div>
