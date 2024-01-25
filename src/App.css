@@ -1,11 +1,13 @@
 .nav-txt-font{
   font-family: 'Mooli', sans-serif;
+  /* margin-bottom: 10px; */
 }
 .nav-element-hover
 {
   display: inline-block;
   position: relative;
   color: #00806B;
+  font-style: italic;
 }
 .nav-element-hover::after{
   content: '';
@@ -72,3 +74,50 @@
   box-shadow: inset 160px 0 0 0 #4ca64c;
   color: white
 }
+
+
+.in-button{
+  /* padding: 0.8em 1.8em; */
+  padding-left: 2px;
+  border: 2px solid #00806B;
+  position: relative;
+  overflow: hidden;
+  background-color: transparent;
+  border-radius: 25px;
+  width: 155px;
+  padding-right: 2px;
+  height: 50px;
+  text-align: center;
+  text-transform: uppercase;
+  font-size: 13px;
+  transition: .3s;
+  z-index: 1;
+  font-family: inherit;
+  font-weight: bold;
+  font-style: italic;
+  color: #00806B;
+ }
+ 
+.in-button::before {
+  content: '';
+  width: 0;
+  height: 300%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(45deg);
+  background: #00806B;
+  transition: .5s ease;
+  display: block;
+  z-index: -1;
+ }
+ 
+ .in-button:hover::before {
+  width: 105%;
+ }
+ 
+ .in-button:hover {
+  color: #ffff;
+ }
+
+ 

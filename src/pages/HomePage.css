@@ -1,3 +1,40 @@
 img{
     height: 550px;
 }
+
+.logout-logo{
+    margin-bottom: 3px;
+}
+.nav-element-hover:hover .logout-logo {
+    transform: rotate(360deg); 
+    transition: transform 1s ease; 
+  }
+
+  .home-img{
+    width : 400px;
+    height: 380px;
+    padding-left: 50px;
+    padding-top: 50px;
+    padding-bottom: 10px;
+    margin-bottom: 50px;
+  }
+
+  .home-content{
+    padding-left: 50px;
+    padding-top: 50px;
+    font-size: larger;
+    font-weight: 500;
+    color: black;
+  }
+
+  /* .animated-content :hover{
+    rotate: 300deg;
+  } */
+
+.home-content{
+  font-style: italic;
+  /* font-feature-settings: "aalt"; */
+  /* font-palette: calc(0,0,120); */
+
+}
+  

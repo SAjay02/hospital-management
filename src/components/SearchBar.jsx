@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { MDBCol, MDBIcon } from 'mdb-react-ui-kit';
 import {Modal, Button} from 'react-bootstrap'
-
+import './Searchbar.css'
 const SearchBar = ({setSelectedProduct}) => {
   const [searchQuery, setSearchQuery] = useState('');
   const [suggestions, setSuggestions] = useState([]);

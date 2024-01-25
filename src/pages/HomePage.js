@@ -5,11 +5,12 @@ import CarouselSlider from '../components/CarouselSlider'
 import './HomePage.css';
 import About from '../components/About';
 
-const HomePage = () => {
+const HomePage = ({onLogout, currentUser}) => {
   return (
     <div>
-        <Header/>
-        <NavigationBar/>
+        <Header currentUser={currentUser}/>
+        <NavigationBar onLogout={onLogout}/>
+
     </div>
   )
 }
