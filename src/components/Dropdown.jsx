@@ -1,16 +1,15 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios'
-import Billing from './Billing';
-import { Button } from 'react-bootstrap';
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import Billing from "./Billing";
+import { Button } from "react-bootstrap";
 
 // const datas = (index) =>{
 //   name : index.product
 //   quantity : index.quantity
 // }
 
-
 function Dropdown() {
-/* *********************************************************************************
+  /* *********************************************************************************
 const [items, setItems] = useState([]);
 const [selectedProduct, setSelectedProduct] = useState('');
 const [userData, setUserData] = useState(''); // State variable to store user-entered data
@@ -65,18 +64,18 @@ const handleInputChange = (event) => {
   );
 };
 **************************************************************************** */
-const [items, setItems] = useState([]);
-  const [selectedItem, setSelectedItem] = useState('');
-  const [quantity, setQuantity] = useState('');
-  const [ selectedData, setSelectedData] = useState([]); // Updated state structure
+  const [items, setItems] = useState([]);
+  const [selectedItem, setSelectedItem] = useState("");
+  const [quantity, setQuantity] = useState("");
+  const [selectedData, setSelectedData] = useState([]); // Updated state structure
 
   useEffect(() => {
-    axios.get('http://localhost:8000/api/items')
+    axios
+      .get("http://localhost:8000/api/items")
       .then((response) => setItems(response.data))
       .catch((error) => console.error(error));
   }, []);
 
-  
   const handleAddProductsClick = (event) => {
     event.preventDefault();
 
@@ -93,12 +92,11 @@ const [items, setItems] = useState([]);
           },
         ];
       });
-      
     }
 
     // Clear the selected item and quantity after processing
-    setSelectedItem('');
-    setQuantity('');
+    setSelectedItem("");
+    setQuantity("");
   };
 
   const handleItemSelect = (event) => {
@@ -111,8 +109,6 @@ const [items, setItems] = useState([]);
     setQuantity(quantityValue);
   };
 
- 
-  
   return (
     <div>
       <div>
@@ -139,8 +135,10 @@ const [items, setItems] = useState([]);
         </div>
       )}
       <br />
-      <Button variant="success"onClick={handleAddProductsClick}>Add Products</Button>
-      
+      <Button variant="success" onClick={handleAddProductsClick}>
+        Add Products
+      </Button>
+
       {/* <Billing dataToSend={selectedData}/> */}
       <hr />
       <div>
@@ -158,12 +156,8 @@ const [items, setItems] = useState([]);
         )}
       </div>
     </div>
-    
   );
- 
 }
-
-
 
 export default Dropdown;
 // export {submitBill}

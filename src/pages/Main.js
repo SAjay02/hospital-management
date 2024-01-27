@@ -29,7 +29,7 @@ const Main = ({onLogout, currentUser}) => {
         <HomePage currentUser={currentUser} onLogout={onLogout}/>
         
           <Routes>
-            <Route Component={CarouselSlider} path='/home'></Route>
+            {/* <Route Component={CarouselSlider} path='/home'></Route> */}
             <Route Component={CarouselSlider} path='/'></Route>
             {/* <Route Component={About} path='/'></Route> */}
             
