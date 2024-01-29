@@ -11,7 +11,7 @@ function ProductCard({ product }) {
 
   const handleShow = () => setShowModal(true);
   const handleClose = () => setShowModal(false);
-
+  
   return (
     <Col xs={12} sm={6} md={4} lg={3}>
       <Card className='card-body' style={{ width: '300px', height: '500px' }} onClick={handleShow}>

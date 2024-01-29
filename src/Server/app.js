@@ -7,7 +7,12 @@ const bodyParser=require("body-parser");
 const Product =require("./models/productModels");
 const Bill = require("./models/billModel") 
 
-
+const corsOptions = {
+  origin: 'http://localhost:3000',  // Update with your React app's origin
+  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+  credentials: true,
+  optionsSuccessStatus: 204,
+};
 const connectdb = require("./configuration/db");
 const app=express();
 //  const productModel = require('./products')
@@ -15,7 +20,7 @@ const PORT=process.env.PORT || 8000;
 
 const availableProducts = []
 app.use(express.json());
-app.use(cors());
+app.use(cors(corsOptions));
 app.use(bodyParser.json());
 
 connectdb();
@@ -59,8 +64,7 @@ app.post("/bill",async(req,res)=>
     
 })
 
-<<<<<<< HEAD
-=======
+
 
 app.post('/api/updateQuantities', async (req, res) => {
   try {
@@ -101,11 +105,20 @@ app.get('/api/billdata', async (req,res)=>{
   res.send(bill).json()
 })
 
->>>>>>> 82e3e3756c8ee69c6bdea5f670638e93399c1835
+
 app.get('/api/data', async (req,res)=>{
-    const products = await Product.find()
-    availableProducts.push(products)
-    res.send(products)
+    // const products = await Product.find();
+    // console.log("products")
+    // availableProducts.push(products)
+    // res.send(products)
+    try {
+      const hardcodedData = [{ name: 'Sample Product', quantity: 10, price: 20 }];
+      console.log('Hardcoded Data:', hardcodedData);
+      res.json(hardcodedData);
+    } catch (error) {
+      console.error('Error fetching data:', error);
+      res.status(500).json({ error: 'Could not fetch data' });
+    }
 })
   
 app.get('/api/items', async (req, res) => {
