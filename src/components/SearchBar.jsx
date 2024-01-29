@@ -1,16 +1,21 @@
 import React, { useState, useEffect } from 'react';
 import { MDBCol, MDBIcon } from 'mdb-react-ui-kit';
+import {Modal, Button} from 'react-bootstrap'
 
 const SearchBar = ({setSelectedProduct}) => {
   const [searchQuery, setSearchQuery] = useState('');
   const [suggestions, setSuggestions] = useState([]);
+
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedItemDetails, setSelectedItemDetails] = useState(null);
   // const [selectedProduct, setSelectedProduct] =useState('');
   useEffect(() => {
     const fetchSuggestions = async () => {
       try {
-        const response = await fetch(`http://localhost:8000/api/items?q=${searchQuery}`);
+        const response = await fetch(`http://localhost:8000/api/data?q=${searchQuery}`);
         const data = await response.json();
-        // console.log(data)
+        console.log(data)
         setSuggestions(data || []); // Ensure suggestions is always an array
       } catch (error) {
         console.error('Error fetching suggestions:', error);
@@ -30,9 +35,30 @@ const SearchBar = ({setSelectedProduct}) => {
 
 // Inside the SearchBar component
 const handleSuggestionClick = (suggestion) => {
-  setSelectedProduct(suggestion);
+  setSelectedItemDetails(suggestion);
+  console.log(selectedItemDetails)
+  setIsModalOpen(true);
 };
 
+// const ItemModal = ({ isModalOpen, selectedItemDetails, closeModal }) => {
+//   if (!isModalOpen || !selectedItemDetails) {
+//     return null;
+//   }
+
+//   // Render your modal content here based on selectedItemDetails
+
+//   return (
+//     <div className="modal">
+//       <div className="modal-content">
+//         {/* Render item details inside the modal */}
+//         <h2>{selectedItemDetails.name}</h2>
+//         {/* <p>{selectedItemDetails.description}</p> */}
+//         {/* Add other details as needed */}
+//         <button onClick={closeModal}>Close</button>
+//       </div>
+//     </div>
+//   );
+// };
   return (
     <div className="position-absolute mt-0 mt-md-3" style={{ marginLeft: '150px' }}>
       <MDBCol md="12">
@@ -69,6 +95,26 @@ const handleSuggestionClick = (suggestion) => {
           </div>
         )}
       </MDBCol>
+      <Modal show={isModalOpen} onHide={() => setIsModalOpen(false)}>
+          <Modal.Header closeButton>
+            <Modal.Title>{selectedItemDetails?.name}</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <p>Description  : {selectedItemDetails?.description}</p>
+            <p>Manufacture Date : {selectedItemDetails?.manufactureDate}</p>
+            <p>Expiry Date : {selectedItemDetails?.expiryDate}</p>
+          </Modal.Body>
+          <Modal.Footer>
+            <Button variant="secondary" onClick={() => setIsModalOpen(false)}>
+              Close
+            </Button>
+          </Modal.Footer>
+        </Modal>
+      {/* <ItemModal
+      isModalOpen={isModalOpen}
+      selectedItemDetails={selectedItemDetails}
+      closeModal={() => setIsModalOpen(false)}
+    /> */}
     </div>
   );
 };
