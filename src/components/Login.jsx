@@ -9,11 +9,13 @@ import "./login.css";
 import Main from "../pages/Main";
 import HomePage from "../pages/HomePage";
 
-const SignIn = ({ setLoginEmail, setLoginPassword, onLogin }) => {
+const SignIn = ({ setLoginEmail, setLoginPassword, onLogin, errorMessage }) => {
   return (
-    <div className="body">
+    <div className="body" >
       <div className="container-login">
         <div className="heading">Sign In</div>
+        {errorMessage && <div className="error" style={{color:'red', fontSize:"13px",fontStyle:'italic'}}>{errorMessage}</div>}
+
         <div className="form">
           <input
             required=""
@@ -64,6 +66,7 @@ const Login = () => {
   const [loginPassword, setLoginPassword] = useState("");
   const [isLoggedIn, setLoggedIn] = useState(false);
   const [user, setUser] = useState({});
+  const [errorMessage, setErrorMessage] = useState("");
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
@@ -88,6 +91,8 @@ const Login = () => {
     } catch (error) {
       console.error("Login error:", error.message);
       setLoggedIn(false);
+      setErrorMessage("Incorrect email or password. Please try again.");
+
     }
   };
   {
@@ -117,6 +122,7 @@ const Login = () => {
           setLoginPassword={setLoginPassword}
           onLogin={login}
           currentUser={user}
+          errorMessage ={errorMessage}
         />
       )}
     </div>

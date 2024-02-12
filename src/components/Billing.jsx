@@ -11,7 +11,7 @@ import { saveAs } from "file-saver";
 import { Document, Page } from "react-pdf";
 import { MdOutlineProductionQuantityLimits } from "react-icons/md";
 import { BiSolidAddToQueue } from "react-icons/bi";
-import { FaHornbill } from "react-icons/fa";
+import { FaHornbill, FaTrash } from "react-icons/fa";
 import { PDFDocument, rgb } from "pdf-lib"; // Corrected import
 // import {ProductCard} from './Current'
 // import {generatePDF} from '../pages/pdfGenerator'
@@ -59,7 +59,10 @@ const Billing = () => {
   useEffect(() => {
     axios
       .get("http://localhost:8000/api/items")
-      .then((response) => setItems(response.data))
+      .then((response) => {
+        const filteredItems = response.data.filter(item => item.quantity >= 0);
+      setItems(filteredItems);
+      })
       .catch((error) => console.error(error));
   }, []);
 
@@ -139,13 +142,12 @@ const Billing = () => {
       pdfDoc.line(20, 80, 190, 80);
 
       // Add table header
-      pdfDoc.autoTable({
-        startY: 90,
-        startX: 10,
-        head: [["Product", "Quantity", "Unit Price", "Total"]],
-        theme: "plain",
-      });
-
+      // pdfDoc.autoTable({
+      //   startY: 90,
+      //   head: [["Product", "Quantity", "Unit Price", "Total"]],
+      //   theme: "plain",
+      // });
+      
       // Add details of selected items in a table-like layout
       const data = selectedData.items.map((item) => [
         item.item,
@@ -153,28 +155,36 @@ const Billing = () => {
         item.sellingPrice,
         item.totalPrice,
       ]);
-
+      
       // Adjust startX for better alignment
       pdfDoc.autoTable({
-        startY: 110,
-        startX: 100, // Adjust this value as needed
-        body: [[data[0].item[0], "Quantity", "Unit Price", "Total"]],
-        theme: "plain",
-        // columnStyles: {
-        //   0: { halign: 'left' },    // Product column (left-aligned)
-        //   1: { halign: 'center' },  // Quantity column (center-aligned)
-        //   2: { halign: 'center' },  // Unit Price column (center-aligned)
-        //   3: { halign: 'center' },  // Total column (center-aligned)
-        // },
+        startY: 90,
+        startX: 20, // Adjust this value for better alignment
+        body: data,
+        columns: [
+          { header: "Product", dataKey: "item" },
+          { header: "Quantity", dataKey: "quantity" },
+          { header: "Unit Price", dataKey: "sellingPrice" },
+          { header: "Total Price", dataKey: "totalPrice" },
+        ],
+        theme: {
+          body: { fillColor: [255, 255, 255], textColor: 0 },
+        },
+        // You can adjust column widths if needed
+        columnStyles: {
+          0: { cellWidth: 40 },
+          1: { cellWidth: 25, halign: "center" },
+          2: { cellWidth: 25, halign: "center" },
+          3: { cellWidth: 25, halign: "center" },
+        },
       });
-
+      
       // Add the total amount
-      pdfDoc.text(
-        `Total Amount: ${totalPrice}`,
-        20,
-        pdfDoc.autoTable.previous.finalY + 20
-      );
-
+      pdfDoc.text(`Total Amount: $${totalPrice}`, {
+        fontSize: 14,
+        color: [255, 0, 0],
+        lineBreak: true,
+      });
       // Save the PDF
       pdfDoc.save("bill.pdf");
     } catch (error) {
@@ -357,6 +367,11 @@ const Billing = () => {
     return originalQuantity - selectedQuantity;
   };
 
+  const handleDeleteProduct = (index) => {
+    const updatedData = [...selectedData.items]
+    updatedData.splice(index, 1)
+    setSelectedData({items : updatedData})
+  }
   // const handleDownloadBill = async () => {
   //   // Validate and submit the form data
   //   try {
@@ -507,6 +522,15 @@ const Billing = () => {
                         Product: {selectedItem.item} - Quantity:{" "}
                         {selectedItem.quantity} - Selling Price: $
                         {selectedItem.sellingPrice}
+                        {/* <Button onClick={() => handleDeleteProduct(index)}><FaTrash />Delete</Button> */}
+                        <FaTrash 
+                          onClick={() => handleDeleteProduct(index)}
+                          size={17}
+                          style={{marginLeft:'15px'}}
+                          className="trash-icon"
+                        >
+
+                        </FaTrash>
                       </li>
                     ))}
                   </ul>

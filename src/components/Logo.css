@@ -13,8 +13,15 @@
         margin-top: 5px;
         padding-top: 10px;
     }
-    .icon{
-        margin-top: 13px;
+    .header-logo{
+        margin-top: 15px;
+        position: absolute;
+        right: 260px;
+        top: 0px;
+    }
+    .header-name{
+        position: absolute;
+        right: 200px;
     }
 }
 

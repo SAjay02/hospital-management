@@ -73,12 +73,12 @@ const Footer = () => {
               <MDBCol md="3" lg="4" xl="3" className="mx-auto mb-4">
                 <h6 className="text-uppercase fw-bold mb-4">
                   <MDBIcon icon="gem" className="me-3" />
-                  Health Care
+                  FLier
                 </h6>
                 <p>
-                  Here you can use rows and columns to organize your footer
-                  content. Lorem ipsum dolor sit amet, consectetur adipisicing
-                  elit.
+                "Connecting communities. Health for all. Your wellness, our priority."
+
+
                 </p>
               </MDBCol>
 
@@ -99,11 +99,7 @@ const Footer = () => {
                     Lozenges
                   </a>
                 </p>
-                <p>
-                  <a href="#!" className="text-reset">
-                    Laravel
-                  </a>
-                </p>
+               
               </MDBCol>
 
               <MDBCol md="3" lg="2" xl="2" className="mx-auto mb-4">
@@ -163,9 +159,9 @@ const Footer = () => {
           className="text-center p-4"
           style={{ color: "white", backgroundColor: "rgba(0, 0, 0, 0.05)" }}
         >
-          © 2023 Copyright :
+          © 2024 Copyright :
           <a className="text-reset fw-bold" href="/">
-            &nbsp;healthcare.com
+            &nbsp;flier.com
           </a>
         </div>
       </MDBFooter>

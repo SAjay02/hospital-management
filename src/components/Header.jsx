@@ -20,7 +20,7 @@ const Header = ({ currentUser }) => {
           <h5
             style={{ color: "white", marginTop: "17px", marginLeft: "800px" }}
           >
-            <HiOutlineUserCircle style={{ marginTop: "-1px" }} size={30} />{" "}
+            <HiOutlineUserCircle style={{ marginTop: "-1px",marginLeft:'-10px' }} size={30} />{" "}
             Hello{" "}
             {currentUser?.email.substr(0, currentUser?.email.indexOf("@"))}
           </h5>
