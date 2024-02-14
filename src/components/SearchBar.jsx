@@ -2,13 +2,30 @@ import React, { useState, useEffect } from "react";
 import { MDBCol, MDBIcon } from "mdb-react-ui-kit";
 import { Modal, Button } from "react-bootstrap";
 import "./Searchbar.css";
+import '../pages/BillingForm.css'
+import {ProductDetailsModal} from './Current'
+import { MdOutlineDescription } from "react-icons/md";
+import { MdOutlineProductionQuantityLimits } from "react-icons/md";
+import { BsCalendar2DateFill } from "react-icons/bs";
+import { GiMoneyStack } from "react-icons/gi";
+import { FaArrowRight } from "react-icons/fa6";
+
 const SearchBar = ({ setSelectedProduct }) => {
   const [searchQuery, setSearchQuery] = useState("");
   const [suggestions, setSuggestions] = useState([]);
 
   const [isModalOpen, setIsModalOpen] = useState(false);
+  // const [showModal, setShowModal] = useState(false);
+
+
   const [selectedItemDetails, setSelectedItemDetails] = useState(null);
   // const [selectedProduct, setSelectedProduct] =useState('');
+
+
+  const handleModalClose = () => {
+    setSelectedItemDetails(null);
+  };
+
   useEffect(() => {
     const fetchSuggestions = async () => {
       try {
@@ -102,7 +119,7 @@ const SearchBar = ({ setSelectedProduct }) => {
           </div>
         )}
       </MDBCol>
-      <Modal show={isModalOpen} onHide={() => setIsModalOpen(false)}>
+      {/* <Modal show={isModalOpen} onHide={() => setIsModalOpen(false)}>
         <Modal.Header closeButton>
           <Modal.Title>{selectedItemDetails?.name}</Modal.Title>
         </Modal.Header>
@@ -116,7 +133,62 @@ const SearchBar = ({ setSelectedProduct }) => {
             Close
           </Button>
         </Modal.Footer>
-      </Modal>
+      </Modal> */}
+      {isModalOpen &&
+          // <ProductDetailsModal
+          // show={true}
+          // onHide={handleModalClose}
+          // product={selectedItemDetails}
+          <Modal show={true} onHide={handleModalClose}>
+          <div className="modal-body" >
+            <Modal.Header >
+              <Modal.Title style={{ fontStyle: "italic" }}>
+                {selectedItemDetails.name.toUpperCase()} Details
+              </Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+              <p>
+                <span>
+                  DESCRIPTION <MdOutlineDescription size={30} />: &nbsp;
+                </span>{" "}
+                {selectedItemDetails.description}
+              </p>
+              <p>
+                <span>
+                  QUANTITY <MdOutlineProductionQuantityLimits size={30} /> : &nbsp;
+                </span>
+                {selectedItemDetails.quantity}
+              </p>
+              <p>
+                <span>
+                  EXPIRY DATE <BsCalendar2DateFill size={30} /> : &nbsp;
+                </span>
+                {selectedItemDetails.expiryDate}
+              </p>
+              <p>
+                <span>
+                  COST <GiMoneyStack size={30} /> : Rs.
+                </span>
+                {selectedItemDetails.cost}
+              </p>
+            </Modal.Body>
+            <Modal.Footer>
+              <button
+                className="in-button billing-btn"
+                variant="secondary"
+                onClick={()=>setIsModalOpen(false)}
+              >
+                Close
+              </button>
+            </Modal.Footer>
+          </div>
+        </Modal>
+        
+      }
+      
+      
+
+      {/* <ProductDetailsModal values = {selectedItemDetails}/> */}
       {/* <ItemModal
       isModalOpen={isModalOpen}
       selectedItemDetails={selectedItemDetails}

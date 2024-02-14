@@ -176,4 +176,4 @@ function ProductDetailsModal({ show, onHide, product }) {
   );
 }
 export default Current;
-export { ProductCard };
+export { ProductCard, ProductDetailsModal};

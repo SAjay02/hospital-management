@@ -5,6 +5,7 @@ import { Container, Row } from "react-bootstrap";
 const Recent = () => {
   const [products, setProducts] = useState([]);
   const [selectedProduct, setSelectedProduct] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     // Fetch products from the database
@@ -32,15 +33,24 @@ const Recent = () => {
   return (
     <div className="App">
       <Container>
-        <Row>
-          {recentProducts.map((product) => (
-            <ProductCard
-              key={product.id}
-              product={product}
-              onClick={() => handleCardClick(product)}
-            />
-          ))}
-        </Row>
+      {loading ? (
+        <>
+          <p style={{textAlign:'center', fontSize:'35px', fontStyle:'italic',fontWeight:'bolder'}}>No recent products available........</p>
+          <h3 style={{textAlign:'center', fontSize:'35px', marginTop:'30px'}}>Please Check Current Available products  &nbsp;:)</h3><br /><br />
+          </>
+        ) : recentProducts.length === 0 ? (
+          <p></p>
+        ) : (
+          <Row>
+            {recentProducts.map((product) => (
+              <ProductCard
+                key={product.id}
+                product={product}
+                onClick={() => handleCardClick(product)}
+              />
+            ))}
+          </Row>
+        )}
       </Container>
     </div>
   );
