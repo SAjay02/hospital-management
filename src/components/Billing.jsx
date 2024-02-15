@@ -18,8 +18,9 @@ import { PDFDocument, rgb } from "pdf-lib"; // Corrected import
 // const product = require('../Server/mod/els/productModels')
 // import {availableProducts} from '../Server/app.js'
 // const product = require('../Server/app.js')
-import jsPDF from "jspdf";
+import {jsPDF } from "jspdf";
 import "jspdf-autotable";
+
 const Billing = () => {
   const [name, setName] = useState("");
   // const [total_price, setTotal_price] = useState('');
@@ -124,76 +125,62 @@ const Billing = () => {
   //     console.error('Error generating PDF:', error);
   //   }
   // };
-
   const generatePDF = () => {
     try {
       // Create a new jsPDF instance
       const pdfDoc = new jsPDF();
-
+  
       // Add title to the PDF
       pdfDoc.text("Invoice", 100, 20);
-
+  
       // Add customer details
-      pdfDoc.text(`Name: ${name}`, 20, 40);
-      pdfDoc.text(`Email: ${email}`, 20, 55);
-      pdfDoc.text(`Phone Number: ${phoneNumber}`, 20, 70);
-
+      pdfDoc.text(`Name: ${name}`, 10, 30);
+      pdfDoc.text(`Email: ${email}`, 10, 40);
+      pdfDoc.text(`Phone Number: ${phoneNumber}`, 10, 50);
+  
       // Add a separator line
-      pdfDoc.line(20, 80, 190, 80);
-
+      pdfDoc.line(10, 60, 200, 60);
+  
       // Add table header
-      // pdfDoc.autoTable({
-      //   startY: 90,
-      //   head: [["Product", "Quantity", "Unit Price", "Total"]],
-      //   theme: "plain",
-      // });
-      
-      // Add details of selected items in a table-like layout
-      const data = selectedData.items.map((item) => [
-        item.item,
-        item.quantity,
-        item.sellingPrice,
-        item.totalPrice,
-      ]);
-      
-      // Adjust startX for better alignment
-      pdfDoc.autoTable({
-        startY: 90,
-        startX: 20, // Adjust this value for better alignment
-        body: data,
-        columns: [
-          { header: "Product", dataKey: "item" },
-          { header: "Quantity", dataKey: "quantity" },
-          { header: "Unit Price", dataKey: "sellingPrice" },
-          { header: "Total Price", dataKey: "totalPrice" },
-        ],
-        theme: {
-          body: { fillColor: [255, 255, 255], textColor: 0 },
-        },
-        // You can adjust column widths if needed
-        columnStyles: {
-          0: { cellWidth: 40 },
-          1: { cellWidth: 25, halign: "center" },
-          2: { cellWidth: 25, halign: "center" },
-          3: { cellWidth: 25, halign: "center" },
-        },
+      pdfDoc.text("Product", 10, 70);
+      pdfDoc.text("Quantity", 60, 70);
+      pdfDoc.text("Unit Price", 100, 70);
+      pdfDoc.text("Total Price", 150, 70);
+  
+      pdfDoc.line(10, 75, 200, 75);
+
+      // Add details of selected items
+      let yPosition = 80; // Initial Y position for the table
+      const gapHeight = 5; // Adjust the gap height as needed
+  
+      // Add details of selected items
+      selectedData.items.forEach((item) => {
+        pdfDoc.text(item.item, 10, yPosition);
+        pdfDoc.text(item.quantity.toString(), 60, yPosition);
+        pdfDoc.text(item.sellingPrice.toString(), 100, yPosition);
+        pdfDoc.text(item.totalPrice.toString(), 150, yPosition);
+        yPosition += 10; // Increment Y position for the next row
       });
-      
+  
       // Add the total amount
-      pdfDoc.text(`Total Amount: $${totalPrice}`, {
-        fontSize: 14,
-        color: [255, 0, 0],
-        lineBreak: true,
-      });
+      const totalPrice = selectedData.items.reduce(
+        (total, item) => total + item.totalPrice,
+        0
+      );
+      pdfDoc.text(`Total Amount: $${totalPrice}`, 10, yPosition + gapHeight);
+  
       // Save the PDF
-      pdfDoc.save("bill.pdf");
-    } catch (error) {
+      pdfDoc.save("bill.pdf");}
+      catch (error) {
       console.error("Error generating PDF:", error);
     }
   };
+  
 
   const handleGenerateBill = (event) => {
     event.preventDefault();
+    console.log(jsPDF.name)
+
     if (selectedData.items.length === 0 || !submitted) {
       setProductErrors({
         ...productErrors,
